@@ -1,0 +1,11 @@
+{
+  "name": "API-server-aj",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:OJoachim/API-server-aj.git",
+  "author": "A. Joachimiak",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}
