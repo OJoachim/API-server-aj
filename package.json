@@ -5,6 +5,9 @@
   "repository": "git@github.com:OJoachim/API-server-aj.git",
   "author": "A. Joachimiak",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "dependencies": {
     "cors": "2.8.5",
     "express": "4.17.1",
