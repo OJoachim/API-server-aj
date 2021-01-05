@@ -57,6 +57,9 @@ export const addSeatRequest = (seat) => {
       dispatch(endRequest({ name: 'ADD_SEAT' }));
 
     } catch(e) {
+      //if (e.message == 'Request failed with status code') {
+        //e.message = 'The slot is already taken...';
+      //}
       dispatch(errorRequest({ name: 'ADD_SEAT', error: e.message }));
     }
 
