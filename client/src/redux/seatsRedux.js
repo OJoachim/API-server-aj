@@ -51,16 +51,14 @@ export const addSeatRequest = (seat) => {
     dispatch(startRequest({ name: 'ADD_SEAT' }));
     try {
 
-      let res = await axios.post(`${API_URL}/seats`, seat);
+      await axios.post(`${API_URL}/seats`, seat);
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      dispatch(addSeat(res));
+      dispatch(addSeat(seat));
       dispatch(endRequest({ name: 'ADD_SEAT' }));
 
     } catch(e) {
-      //if (e.message == 'Request failed with status code') {
-        //e.message = 'The slot is already taken...';
-      //}
-      dispatch(errorRequest({ name: 'ADD_SEAT', error: e.message }));
+      const message = e.response.data.message || e.message
+      dispatch(errorRequest({ name: 'ADD_SEAT', error: message }));
     }
 
   };
