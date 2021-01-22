@@ -6,7 +6,8 @@
   "author": "A. Joachimiak",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "build": "cd client && yarn install && yarn build"
   },
   "dependencies": {
     "cors": "2.8.5",
