@@ -1,4 +1,4 @@
 see app on:
-https://festivalswaves.herokuapp.com/
+https://festivalwave-aj.herokuapp.com/
 
 # API-server-aj
