@@ -24,8 +24,9 @@ router.route('/seats').post((req, res) => {
       client: client,
       email: email,
     });
-    res.json({massage: 'OK'});
   }
+  req.io.emit('seatsUpdated', db.seats);
+  return res.json({massage: 'OK'});
 });
 
 router.route('/seats/:id').put((req, res) => {
