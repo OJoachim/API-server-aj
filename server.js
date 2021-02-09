@@ -32,7 +32,9 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-mongoose.connect('mongodb://localhost:27017/companyDB', { useNewUrlParser: true });
+//mongoose.connect('mongodb://localhost:27017/companyDB', { useNewUrlParser: true }); //to z lokal. db
+mongoose.connect('mongodb+srv://user-db_76:USEdb76oLa21@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
