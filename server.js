@@ -32,10 +32,9 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://user-db_76:USEdb76oLa21@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
 
 const db = mongoose.connection;
-//mongoose.connect(mongoConnectionString, {useNewUrlParser: true, useUnifiedTopology: true});
 
 db.once('open', () => {
   console.log('Connected to the database');
