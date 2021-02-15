@@ -9,50 +9,40 @@ const expect = chai.expect;
 const request = chai.request;
 
 describe('GET /concerts', () => {
-  before(async () => {
-    const testConOne = new Concert({performer: 'Johny', genre: 'Rock', price: 20, day: 1, image: 'image'});
-    await testConOne.save();
-
-    const testConTwo = new Concert({performer: 'Ula', genre: 'Pop', price: 15, day: 3, image: 'image1'});
-    await testConTwo.save();
-
-    const testConThree = new Concert({performer: 'Maja', genre: 'Rock', price: 20, day: 2, image: 'image2'});
-    await testConThree.save();
-  });
-
-  it('/ should return concerts filtered by performer', async () => {
-    const res = await request(server).get('/concerts/performer/Ula');
+  
+  it('/concerts should return all concerts', async () => {
+    const res = await request(server).get('/concerts');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.be.an('array');
-    expect(res.body.length).to.be.equal(2);
+    expect(res.body).to.be.an('object');
+    expect(res.body).not.to.be.null;
   });
 
-  it('/ should return concerts filtered by genre', async () => {
+  it('/concerts/performer/:performer should return concerts filtered by performer', async () => {
+    const res = await request(server).get('/concerts/performer/John Doe');
+    expect(res.status).to.be.equal(200);
+    expect(res.body).to.be.an('object');
+    expect(res.body).not.to.be.null;
+  });
+
+  it('/concerts/genre/:genre should return concerts filtered by genre', async () => {
     const res = await request(server).get('/concerts/genre/Rock');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.be.an('array');
-    expect(res.body.length).to.be.equal(2);
+    expect(res.body).to.be.an('object');
+    expect(res.body).not.to.be.null;
   });
 
-  it('/ should return concerts filtered by price', async () => {
+  it('/concerts/price/:price_min/:price_max should return concerts filtered by range of price', async () => {
     const res = await request(server).get('/concerts/price/15/20');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.be.an('array');
-    expect(res.body.length).to.be.equal(1);
+    expect(res.body).to.be.an('object');
+    expect(res.body).not.to.be.null;
   });
 
-  it('/ should return concerts filtered by day', async () => {
+  it('/concerts/day/:day should return concerts filtered by day', async () => {
     const res = await request(server).get('/concerts/day/1');
     expect(res.status).to.be.equal(200);
-    expect(res.body).to.be.an('array');
-    expect(res.body.length).to.be.equal(2);
+    expect(res.body).to.be.an('object');
+    expect(res.body).not.to.be.null;
   });
-
-  after(async () => {
-    await Concert.deleteMany();
-  });
-
-  after(() => {
-    mongoose.models = {};
-  });
+  
 }); 

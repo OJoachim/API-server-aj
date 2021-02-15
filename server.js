@@ -32,7 +32,6 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-//mongoose.connect('mongodb+srv://user-db_76:USEdb76oLa21@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
 const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://user-db_76:USEdb76oLa21@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority' :  'mongodb://localhost:27017/NewWaveDB';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
