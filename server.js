@@ -3,6 +3,8 @@ const path = require('path');
 const cors = require('cors');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const env = require('dotenv').config();
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(helmet());
 app.use(cors());
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -32,7 +35,8 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://user-db_76:USEdb76oLa21@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority' :  'mongodb://localhost:27017/NewWaveDB';
+const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://process.env.DB_USER:process.env.DB_PASS@cluster0.baamv.mongodb.net/NewWaveDB?retryWrites=true&w=majority' :  'mongodb://localhost:27017/NewWaveDB';
+
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;

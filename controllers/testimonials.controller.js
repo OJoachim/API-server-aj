@@ -1,4 +1,5 @@
 const Testimonial = require('../models/Testimonial.model');
+const sanitize = require('mongo-sanitize');
 
 exports.getAll = async (req, res) => {
   try {
@@ -36,11 +37,19 @@ exports.getById = async (req, res) => {
 exports.addNew = async (req, res) => {
   const {author, text} = req.body;
   try { 
-    const newTestimonial = new Testimonial({author: author, text: text});
-    await newTestimonial.save();
-    res.json({message: 'OK'});
+    //const newTestimonial = new Testimonial({author: author, text: text});
+    //await newTestimonial.save();
+    //res.json({message: 'OK'});
+    if (!text || !text.length || !author || !author.length) throw new Error('Invalid data!');
+    else {
+      const cleanAuthor = sanitize(author);
+      const cleanText = sanitize(text);
+      const newTestimonial = new Testimonial({author: cleanAuthor, text: cleanText});
+      await newTestimonial.save();
+      res.status(201).json({message: 'OK'});
+    }
   } catch (err) {
-    res.status(500).json({message: err});
+    res.status(500).json({message: 'Something went wrong!'});
   }
 };
 
